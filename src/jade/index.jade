@@ -1,0 +1,30 @@
+!!! 5
+html(lang='en', ng-app="WebFract3D")
+  head
+    meta(charset='utf-8')
+    title Web Fract 3D
+    link(href='http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css', rel="stylesheet", type="text/css")
+    link(href='./stylesheets/app.css', rel="stylesheet", type="text/css")
+
+  body#web-fract-3d(ng-controller="ControlPanelCtrl")
+    include control_panel
+    include canvas
+
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+    script(src='https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r61/three.min.js')
+    script(src='./javascripts/base.js')
+    script(src='./javascripts/control_panel_controller.js')
+    script(src='./javascripts/color_functions.js')
+    script(src='./javascripts/depth_functions.js')
+    script(src='./javascripts/renderer.js')
+    script(src='./javascripts/fractals/base.js')
+    script(src='./javascripts/fractals/mandelbrot.js')
+    script(src='./javascripts/fractals/mandelbrot3.js')
+    script(src='./javascripts/fractals/newton2.js')
+    script(src='./javascripts/fractals/newton3.js')
+    script(src='./javascripts/fractals/newton4.js')
+    script(src='./javascripts/fractals/newton6.js')
+

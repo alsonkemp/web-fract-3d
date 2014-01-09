@@ -1,0 +1,10 @@
+{
+    "name": "nearbypop",
+    "version": "0.0.1",
+    "dependencies": {
+      "coffee-script":"",
+      "coffeescript-concat":"",
+      "jade":"",
+      "less":""
+    }
+}

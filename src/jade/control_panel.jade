@@ -1,0 +1,58 @@
+#control-panel.panel.panel-default(ng-class="{shrunken:!expanded}",  ng-click="doNotHandleKeyPresses()") 
+  .panel-heading
+    span.title Web Fract 3D Control Panel
+    input(type="checkbox", ng-model="expanded")
+  .panel-body
+    form.form-horizontal(role="form")
+      .form-group
+        label.col-sm-3.control-label View Position
+        .col-sm-9
+          input.form-control(type="number",
+                             ng-model="view_state.position.x")
+          input.form-control(type="number",
+                             ng-model="view_state.position.y")
+          input.form-control(type="number",
+                             ng-model="view_state.position.z")
+      .form-group
+        label.col-sm-3.control-label View Rotation
+        .col-sm-9
+          input.form-control(type="number", min="-180", max="180",
+                             ng-model="view_state.rotation.x")
+          input.form-control(type="number", min="-180", max="180",
+                             ng-model="view_state.rotation.y")
+          input.form-control(type="number", min="-180", max="180",
+                             ng-model="view_state.rotation.z")
+      .form-group
+        label.col-sm-8.control-label View Size
+        .col-sm-4
+          input.form-control(type="number", min="1",
+            ng-model="view_state.size")
+      .form-group
+        label.col-sm-3.control-label Fractal Position
+        .col-sm-9
+          input.form-control(type="number", min="-4", max="4",
+                             ng-model="fractal_state.r")
+          input.form-control(type="number", min="-4", max="4",
+                             ng-model="fractal_state.i")
+      .form-group
+        label.col-sm-3.control-label Julia Position
+        .col-sm-9
+          input.form-control(type="number", min="-4", max="4",
+                             ng-model="fractal_state.jr")
+          input.form-control(type="number", min="-4", max="4",
+                             ng-model="fractal_state.ji")
+      .form-group
+        label.col-sm-8.control-label Fractal Size
+        .col-sm-4
+          input.form-control(type="number", min="0", max="180",
+                             ng-model="fractal_state.size")
+      .form-group
+        label.col-sm-8.control-label Fractal Divisions
+        .col-sm-4
+          input.form-control(type="number", min="8", max="1000",
+            ng-model="fractal_state.divisions")
+      .form-group
+        label.col-sm-8.control-label Fractal Iterations
+        .col-sm-4
+          input.form-control(type="number", min="8", max="1000",
+                             ng-model="fractal_state.max_iterations")
