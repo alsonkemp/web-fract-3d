@@ -1,9 +1,13 @@
-#control-panel.panel.panel-default(ng-class="{shrunken:!expanded}",  ng-click="doNotHandleKeyPresses()") 
+#control-panel.panel.panel-default(ng-click="doNotHandleKeyPresses()")
   .panel-heading
     span.title Web Fract 3D Control Panel
-    input(type="checkbox", ng-model="expanded")
   .panel-body
     form.form-horizontal(role="form")
+      .form-group
+        label.col-sm-8.control-label View Size
+        .col-sm-4
+          input.form-control(type="number", min="1",
+            ng-model="view_state.size")
       .form-group
         label.col-sm-3.control-label View Position
         .col-sm-9
@@ -22,11 +26,7 @@
                              ng-model="view_state.rotation.y")
           input.form-control(type="number", min="-180", max="180",
                              ng-model="view_state.rotation.z")
-      .form-group
-        label.col-sm-8.control-label View Size
-        .col-sm-4
-          input.form-control(type="number", min="1",
-            ng-model="view_state.size")
+
       .form-group
         label.col-sm-3.control-label Fractal Position
         .col-sm-9

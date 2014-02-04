@@ -1,41 +1,20 @@
-WebFract3D.controller 'ControlPanelCtrl', ($scope, $location, $window) ->
-  @renderer = new WebFract3D.Renderer()
+WebFract3D.controller 'ControlPanelCtrl', ($scope, $location, $window,
+    ViewStateService, FractalStateService, RendererService, $rootScope) ->
   _.extend $scope,
-    expanded: true
-    original_view_state:
-      position: x: 0, y: 0, z: -500
-      rotation: x: -30, y: 0, z: 0
-      size: 800
-      # Boolean to drive redraw of the ViewState.
-      redraw: true
-    original_fractal_state:
-      fractal: 'Mandelbrot'
-      r: 0
-      i: 0
-      size: 4
-      divisions: 50
-      max_iterations: 100
-      # For Julias
-      jr: 0
-      ji: 0
-      # Boolean to drive recalc of the fractal
-      recalc: true
-
+    # Need to reference these in the $scope so the view gets them
+    fractal_state: FractalStateService.state
+    view_state: ViewStateService.state
 
     # the keypresses when a user is using the control
     # panel trigger the hotkeys, only enable hotkeys
     # when the canvas if focused.
     handleKeypresses: false
-    doHandleKeyPresses: -> 
-      console.log "doHandleKeyPresses"
-      $scope.handleKeyPresses = true
-    doNotHandleKeyPresses: ->
-      console.log "doNotHandleKeyPresses"
-      $scope.handleKeyPresses = false
+    doHandleKeyPresses:    -> $scope.handleKeyPresses = true
+    doNotHandleKeyPresses: -> $scope.handleKeyPresses = false
     handleKeyPress: (evt) ->
       return if not $scope.handleKeyPresses
       ch = String.fromCharCode(evt.keyCode)
-      fs = $scope.fractal_state
+      fs = FractalStateService.state
       switch ch
         when '['
           fs.divisions /= 2
@@ -47,7 +26,6 @@ WebFract3D.controller 'ControlPanelCtrl', ($scope, $location, $window) ->
         when '4' then changeFractal('Newton3')
         when '5' then changeFractal('Newton4')
         when '6' then changeFractal('Newton6')
-        #when 'j' then fs.fractal = 'julia'
 
       # Special keys
       switch evt.keyCode
@@ -58,8 +36,7 @@ WebFract3D.controller 'ControlPanelCtrl', ($scope, $location, $window) ->
         when 37 then fs.r -= fs.size * 0.1 # left
         when 39 then fs.r += fs.size * 0.1 # right
 
-
-      vs = $scope.view_state
+      vs = ViewStateService.state
       switch ch
         when '*' then vs.position.z -= 1
         when '/' then vs.position.z += 1
@@ -69,42 +46,24 @@ WebFract3D.controller 'ControlPanelCtrl', ($scope, $location, $window) ->
         when 'l' then vs.rotation.y -= 2.0
         when 'u' then vs.rotation.z += 2.0
         when 'o' then vs.rotation.z -= 2.0
-
       # Need to digest explicitly since this event was not handled
       # by Angular
-      $scope.$digest()
-
-  # Deep watch on both view_state and fractal_state
-  # and do a full redraw on changes
-  $scope.$watch(
-    'view_state',
-    (() => 
-      $scope.view_state.redraw = true
-      @renderer.update($scope.view_state, $scope.fractal_state) if @renderer
-    ),
-    true)
-
-  $scope.$watch(
-    'fractal_state',
-    (() =>
-      $scope.fractal_state.recalc = true
-      @renderer.update($scope.view_state, $scope.fractal_state) if @renderer
-      $location.search $scope.fractal_state
-    ),true)
+      $rootScope.$digest()
 
   changeFractal = (newFractal) ->
-    $scope.fractal_state.fractal = newFractal
+    # Set initial state
+    ViewStateService.reset()
+    FractalStateService.reset()
+
+    FractalStateService.fractal = newFractal
 
   # Special keys need keydown?
   $window.onkeydown = $scope.handleKeyPress
   $window.onkeypress = $scope.handleKeyPress
-  $scope.view_state = $scope.original_view_state
-  $scope.fractal_state = $scope.original_fractal_state
 
-  #splat on Fractal properties if we have them
+  #splat on Fractal properties if they're in the URL
   for k, v of $location.search()
     if !isNaN(parseFloat(v)) && isFinite(v)
-      $scope.fractal_state[k] = Number(v)
+      FractalStateService.state[k] = Number(v)
     else 
-      $scope.fractal_state[k] = v
-
+      FractalStateService.state[k] = v

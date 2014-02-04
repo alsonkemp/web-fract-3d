@@ -1,9 +1,9 @@
 class WebFract3D.Fractals.Base
-  constructor: (view_state, fractal_state) ->
+  constructor: (view_state_service, fractal_state_service) ->
     @points = []
     @depths = []
-    @view_state = view_state
-    @fractal_state = fractal_state
+    @view_state = view_state_service.state
+    @fractal_state = fractal_state_service.state
     @max_iterations = 0
     @min_iterations = 10000
     @run()

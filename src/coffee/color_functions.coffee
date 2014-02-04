@@ -1,7 +1,7 @@
 WebFract3D.ColorFunctions =
-  Mandelbrot: (view_state, fractal_state) ->
+  Mandelbrot: (fractal) ->
     (iter) ->
-      if iter == fractal_state.max_iterations
+      if iter == fractal.max_iterations
         [0,0,0]
       else if (iter % 120 < 20)
         [0.2+(iter % 120)/25.0, 0, 0]
@@ -16,7 +16,7 @@ WebFract3D.ColorFunctions =
       else
         [0, 0, 1-((iter%120)-100)/20]
 
-  Newton2: (view_state, fractal_state, fractal) ->
+  Newton2: (fractal) ->
     blank = [0,0,0]
     colors = [
       [1.0,0.0,0.0],

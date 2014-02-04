@@ -1,25 +1,17 @@
 #web-fract-3d {
   overflow: hidden;
   #control-panel {
+    height: 100%;
     width: 300px;
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: 0px;
+    right: 0px;
     .panel-heading {
       input[type="checkbox"] {
         position: absolute;
         top: 5px;
         right: 5px;
       }
-    }
-    &.shrunken {
-      height: auto;
-      width: auto;
-      .panel-heading {
-        height: 32px;
-        span.title { display: none; }
-      }
-      .panel-body {display: none; }
     }
     .panel-body {
       .col-sm-9 {
@@ -32,8 +24,6 @@
     }
   }
   canvas {
-    width: 100%;
-    height: 100%;
     background: black;
   }
 }

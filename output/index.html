@@ -7,12 +7,16 @@
     <link href="./stylesheets/app.css" rel="stylesheet" type="text/css">
   </head>
   <body id="web-fract-3d" ng-controller="ControlPanelCtrl">
-    <div id="control-panel" ng-class="{shrunken:!expanded}" ng-click="doNotHandleKeyPresses()" class="panel panel-default"> 
-      <div class="panel-heading"><span class="title">Web Fract 3D Control Panel</span>
-        <input type="checkbox" ng-model="expanded">
-      </div>
+    <div id="control-panel" ng-click="doNotHandleKeyPresses()" class="panel panel-default">
+      <div class="panel-heading"><span class="title">Web Fract 3D Control Panel</span></div>
       <div class="panel-body">
         <form role="form" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-8 control-label">View Size</label>
+            <div class="col-sm-4">
+              <input type="number" min="1" ng-model="view_state.size" class="form-control">
+            </div>
+          </div>
           <div class="form-group">
             <label class="col-sm-3 control-label">View Position</label>
             <div class="col-sm-9">
@@ -27,12 +31,6 @@
               <input type="number" min="-180" max="180" ng-model="view_state.rotation.x" class="form-control">
               <input type="number" min="-180" max="180" ng-model="view_state.rotation.y" class="form-control">
               <input type="number" min="-180" max="180" ng-model="view_state.rotation.z" class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-8 control-label">View Size</label>
-            <div class="col-sm-4">
-              <input type="number" min="1" ng-model="view_state.size" class="form-control">
             </div>
           </div>
           <div class="form-group">
@@ -109,6 +107,8 @@
     <script src="./javascripts/control_panel_controller.js"></script>
     <script src="./javascripts/color_functions.js"></script>
     <script src="./javascripts/depth_functions.js"></script>
+    <script src="./javascripts/view_state_service.js"></script>
+    <script src="./javascripts/fractal_state_service.js"></script>
     <script src="./javascripts/renderer.js"></script>
     <script src="./javascripts/fractals/base.js"></script>
     <script src="./javascripts/fractals/mandelbrot.js"></script>
