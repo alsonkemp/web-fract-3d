@@ -12,7 +12,7 @@
       return _ref;
     }
 
-    Newton6.prototype.poles = [[1, 0], [0.5, 0.866025404], [0.5, -0.866025404], [-1, 0], [-0.5, 0.866025404], [-0.5, -0.866025404]];
+    Newton6.prototype.poles = WebFract3D.Fractals.Base.prototype.makePoles(6);
 
     Newton6.prototype.calculate = function(r, i) {
       var a, deni, denr, numi, numr, tempi, tempr, z2i, z2r, zi, zr, _i, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8;
@@ -42,6 +42,6 @@
 
     return Newton6;
 
-  })(WebFract3D.Fractals.Base);
+  })(WebFract3D.Fractals.Newton2);
 
 }).call(this);

@@ -61,6 +61,56 @@
       return [r1 * r2 - i1 * i2, r1 * i2 + r2 * i1];
     };
 
+    Base.prototype.makePoles = function(num) {
+      var n, poles, rot, _i;
+      poles = [];
+      for (n = _i = 0; 0 <= num ? _i < num : _i > num; n = 0 <= num ? ++_i : --_i) {
+        rot = 2 * Math.PI * n / num;
+        poles.push([Math.cos(rot), Math.sin(rot)]);
+      }
+      return poles;
+    };
+
+    Base.prototype.depthFunction = function(iter) {
+      return this.view_state.size * (0.5 - Math.log(iter + 1 - this.min_iterations) / Math.log(this.max_iterations - this.min_iterations));
+    };
+
+    Base.prototype.mandelColorFunction = function(iter) {
+      if (iter === this.fractal_state.max_iterations) {
+        return [0, 0, 0];
+      } else if (iter % 120 < 20) {
+        return [0.2 + (iter % 120) / 25.0, 0, 0];
+      } else if (((iter % 120) >= 20) && ((iter % 120) < 40)) {
+        return [1, 0.2 + (iter % 120) / 25, 0, 0];
+      } else if (((iter % 120) >= 40) && ((iter % 120) < 60)) {
+        return [1.0 - ((iter % 120) - 40) / 20, 1, 0];
+      } else if (((iter % 120) >= 60) && ((iter % 120) < 80)) {
+        return [0, 1, 0.2 + ((iter % 120) - 60) / 25];
+      } else if (((iter % 120) >= 80) && ((iter % 120) < 100)) {
+        return [0, 1 - ((iter % 120) - 80) / 20, 1];
+      } else {
+        return [0, 0, 1 - ((iter % 120) - 100) / 20];
+      }
+    };
+
+    Base.prototype.newtonColors = [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0], [1.0, 1.0, 0.0], [0.0, 1.0, 1.0], [1.0, 0.0, 1.0], [1.0, 1.0, 0.5], [0.5, 1.0, 1.0], [1.0, 0.5, 1.0], [0.7, 0.7, 1.0]];
+
+    Base.prototype.newtonCloseDistance = 0.01;
+
+    Base.prototype.newtonColorFunction = function(iter, zr, zi) {
+      var i, idx, p, r, _i, _len, _ref;
+      _ref = this.poles;
+      for (idx = _i = 0, _len = _ref.length; _i < _len; idx = ++_i) {
+        p = _ref[idx];
+        r = p[0] - zr;
+        i = p[1] - zi;
+        if (Math.sqrt(r * r + i * i) < this.newtonCloseDistance) {
+          return this.newtonColors[idx + 1];
+        }
+      }
+      return this.newtonColors[0];
+    };
+
     return Base;
 
   })();

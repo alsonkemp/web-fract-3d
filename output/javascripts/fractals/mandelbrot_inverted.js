@@ -4,17 +4,15 @@
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  WebFract3D.Fractals.Mandelbrot = (function(_super) {
-    __extends(Mandelbrot, _super);
+  WebFract3D.Fractals.InvertedMandelbrot = (function(_super) {
+    __extends(InvertedMandelbrot, _super);
 
-    function Mandelbrot() {
-      _ref = Mandelbrot.__super__.constructor.apply(this, arguments);
+    function InvertedMandelbrot() {
+      _ref = InvertedMandelbrot.__super__.constructor.apply(this, arguments);
       return _ref;
     }
 
-    Mandelbrot.prototype.colorFunction = WebFract3D.Fractals.Base.prototype.mandelColorFunction;
-
-    Mandelbrot.prototype.calculate = function(r, i) {
+    InvertedMandelbrot.prototype.calculate = function(r, i) {
       var a, zi, zr, _i, _ref1, _ref2;
       zr = 0;
       zi = 0;
@@ -29,7 +27,7 @@
       return [a, zr, zi];
     };
 
-    return Mandelbrot;
+    return InvertedMandelbrot;
 
   })(WebFract3D.Fractals.Base);
 

@@ -1,5 +1,5 @@
-class WebFract3D.Fractals.Newton4 extends WebFract3D.Fractals.Base
-  poles: [[1,0],[-1,0],[0,1],[0,-1]]
+class WebFract3D.Fractals.Newton4 extends WebFract3D.Fractals.Newton2
+  poles: WebFract3D.Fractals.Base::makePoles 4
 
   calculate: (r,i) ->
     zr  = 10

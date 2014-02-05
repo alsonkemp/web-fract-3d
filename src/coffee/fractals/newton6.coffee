@@ -1,6 +1,5 @@
-class WebFract3D.Fractals.Newton6 extends WebFract3D.Fractals.Base
-  poles: [[ 1,0],[ 0.5, 0.866025404],[ 0.5, -0.866025404],
-          [-1,0],[-0.5, 0.866025404],[-0.5, -0.866025404]]
+class WebFract3D.Fractals.Newton6 extends WebFract3D.Fractals.Newton2
+  poles: WebFract3D.Fractals.Base::makePoles 6
 
   calculate: (r,i) ->
     zr  = 10

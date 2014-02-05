@@ -9,6 +9,9 @@
       return _this.webgl_renderer.setSize(window.innerWidth, window.innerHeight);
     };
     this.recalc = function() {
+      if (!FractalStateService.state.fractal) {
+        return;
+      }
       _this.fractal = new WebFract3D.Fractals[FractalStateService.state.fractal](ViewStateService, FractalStateService);
       _this.scene.remove(_this.mesh);
       _this.mesh = _this.getNewMesh();
@@ -28,28 +31,29 @@
       return _this.webgl_renderer.render(_this.scene, _this.camera);
     };
     this.getNewMesh = function() {
-      var buildVertex, color_f, depth_f, f, fss, geometry, inc, min, points, v, vss, x, y, _i, _j, _ref, _ref1, _x, _y,
+      var aspect_ratio, buildVertex, f, fss, geometry, points, v, vss, x, xinc, xmin, y, yinc, ymin, _i, _j, _ref, _ref1, _x, _y,
         _this = this;
       fss = FractalStateService.state;
       vss = ViewStateService.state;
       geometry = new THREE.Geometry();
-      color_f = WebFract3D.ColorFunctions[fss.fractal](this.fractal);
-      depth_f = WebFract3D.DepthFunctions[fss.fractal](this.fractal, ViewStateService);
-      min = vss.size / -2;
-      inc = vss.size / fss.divisions;
-      y = min;
+      aspect_ratio = (window.innerWidth - 300) / window.innerHeight;
+      ymin = vss.size / -2;
+      yinc = vss.size / fss.divisions;
+      xmin = ymin * aspect_ratio;
+      xinc = yinc * aspect_ratio;
+      y = ymin;
       v = 0;
       points = this.fractal.points;
       for (_y = _i = 1, _ref = fss.divisions; 1 <= _ref ? _i <= _ref : _i >= _ref; _y = 1 <= _ref ? ++_i : --_i) {
-        x = min;
+        x = xmin;
         for (_x = _j = 1, _ref1 = fss.divisions; 1 <= _ref1 ? _j <= _ref1 : _j >= _ref1; _x = 1 <= _ref1 ? ++_j : --_j) {
           buildVertex = function(dx, dy) {
             var c, d, i, zi, zr, _ref2;
             _ref2 = points[_y + dy][_x + dx], i = _ref2[0], zr = _ref2[1], zi = _ref2[2];
-            d = depth_f(i);
-            geometry.vertices.push(new THREE.Vector3(x + dx * inc, y + dy * inc, d));
+            d = _this.fractal.depthFunction(i);
+            geometry.vertices.push(new THREE.Vector3(x + dx * xinc, y + dy * yinc, d));
             c = new THREE.Color('0xffffff');
-            c.setRGB.apply(c, color_f(i, zr, zi));
+            c.setRGB.apply(c, _this.fractal.colorFunction(i, zr, zi));
             return f.vertexColors.push(c);
           };
           f = new THREE.Face3(v++, v++, v++);
@@ -62,9 +66,9 @@
           buildVertex(-1, 0);
           buildVertex(0, -1);
           geometry.faces.push(f);
-          x += inc;
+          x += xinc;
         }
-        y += inc;
+        y += yinc;
       }
       return new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({
         side: THREE.DoubleSide,

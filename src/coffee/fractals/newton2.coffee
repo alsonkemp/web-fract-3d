@@ -1,4 +1,5 @@
 class WebFract3D.Fractals.Newton2 extends WebFract3D.Fractals.Base
+  colorFunction: WebFract3D.Fractals.Base::newtonColorFunction
   poles: [[1, 0], [-1,0]]
 
   calculate: (r,i) ->

@@ -4,22 +4,23 @@
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  WebFract3D.Fractals.Mandelbrot = (function(_super) {
-    __extends(Mandelbrot, _super);
+  WebFract3D.Fractals.Mandelbrot5 = (function(_super) {
+    __extends(Mandelbrot5, _super);
 
-    function Mandelbrot() {
-      _ref = Mandelbrot.__super__.constructor.apply(this, arguments);
+    function Mandelbrot5() {
+      _ref = Mandelbrot5.__super__.constructor.apply(this, arguments);
       return _ref;
     }
 
-    Mandelbrot.prototype.colorFunction = WebFract3D.Fractals.Base.prototype.mandelColorFunction;
-
-    Mandelbrot.prototype.calculate = function(r, i) {
-      var a, zi, zr, _i, _ref1, _ref2;
+    Mandelbrot5.prototype.calculate = function(r, i) {
+      var a, zi, zr, _i, _ref1, _ref2, _ref3, _ref4, _ref5;
       zr = 0;
       zi = 0;
       for (a = _i = 0, _ref1 = this.fractal_state.max_iterations - 1; 0 <= _ref1 ? _i <= _ref1 : _i >= _ref1; a = 0 <= _ref1 ? ++_i : --_i) {
         _ref2 = this.complexMultiplication(zr, zi, zr, zi), zr = _ref2[0], zi = _ref2[1];
+        _ref3 = this.complexMultiplication(zr, zi, zr, zi), zr = _ref3[0], zi = _ref3[1];
+        _ref4 = this.complexMultiplication(zr, zi, zr, zi), zr = _ref4[0], zi = _ref4[1];
+        _ref5 = this.complexMultiplication(zr, zi, zr, zi), zr = _ref5[0], zi = _ref5[1];
         zr += r;
         zi += i;
         if (zr * zr + zi * zi > 4) {
@@ -29,8 +30,8 @@
       return [a, zr, zi];
     };
 
-    return Mandelbrot;
+    return Mandelbrot5;
 
-  })(WebFract3D.Fractals.Base);
+  })(WebFract3D.Fractals.Mandelbrot);
 
 }).call(this);

@@ -11,21 +11,27 @@
       .form-group
         label.col-sm-3.control-label View Position
         .col-sm-9
-          input.form-control(type="number",
-                             ng-model="view_state.position.x")
-          input.form-control(type="number",
-                             ng-model="view_state.position.y")
-          input.form-control(type="number",
-                             ng-model="view_state.position.z")
+          input.triple.form-control(type="number",
+                                    ng-model="view_state.position.x")
+          input.triple.form-control(type="number",
+                                    ng-model="view_state.position.y")
+          input.triple.form-control(type="number",
+                                    ng-model="view_state.position.z")
       .form-group
         label.col-sm-3.control-label View Rotation
         .col-sm-9
-          input.form-control(type="number", min="-180", max="180",
-                             ng-model="view_state.rotation.x")
-          input.form-control(type="number", min="-180", max="180",
-                             ng-model="view_state.rotation.y")
-          input.form-control(type="number", min="-180", max="180",
-                             ng-model="view_state.rotation.z")
+          input.triple.form-control(type="number", min="-180", max="180",
+                                    ng-model="view_state.rotation.x")
+          input.triple.form-control(type="number", min="-180", max="180",
+                                    ng-model="view_state.rotation.y")
+          input.triple.form-control(type="number", min="-180", max="180",
+                                    ng-model="view_state.rotation.z")
+
+      .form-group
+        label.col-sm-3.control-label Fractal
+        .col-sm-9
+          select.form-control(ng-model="fractal_state.fractal",
+                              ng-options="f for f in fractal_state.fractals")
 
       .form-group
         label.col-sm-3.control-label Fractal Position
@@ -34,13 +40,6 @@
                              ng-model="fractal_state.r")
           input.form-control(type="number", min="-4", max="4",
                              ng-model="fractal_state.i")
-      .form-group
-        label.col-sm-3.control-label Julia Position
-        .col-sm-9
-          input.form-control(type="number", min="-4", max="4",
-                             ng-model="fractal_state.jr")
-          input.form-control(type="number", min="-4", max="4",
-                             ng-model="fractal_state.ji")
       .form-group
         label.col-sm-8.control-label Fractal Size
         .col-sm-4

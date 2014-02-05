@@ -3,19 +3,22 @@
   WebFract3D.factory("FractalStateService", function($rootScope) {
     var fresh_state,
       _this = this;
+    this.state = {};
     fresh_state = {
       fractal: 'Mandelbrot',
+      fractals: ['Mandelbrot', 'MandelbrotPlus', 'HalfMandelbrot', 'InvertedMandelbrot', 'Mandelbrot3', 'Mandelbrot4', 'Mandelbrot5', 'Newton2', 'Newton3', 'Newton4', 'Newton6', 'Newton10'],
       r: 0,
       i: 0,
       size: 4,
       divisions: 50,
       aspect_ratio: (window.innerWidth - 300) / window.innerHeight,
-      max_iterations: 300,
-      jr: 0,
-      ji: 0
+      max_iterations: 300
     };
     this.reset = function() {
-      return _this.state = _.extend({}, fresh_state);
+      var f;
+      f = _this.state.fractal;
+      _.extend(_this.state, fresh_state);
+      return _this.state.fractal = f;
     };
     $rootScope.FractalStateService = this;
     this.reset();

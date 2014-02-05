@@ -15,8 +15,11 @@
 }
 #web-fract-3d #control-panel .panel-body .col-sm-9 input[type="number"] {
   display: inline-block;
-  width: 30%;
+  width: 48%;
   padding: 6px 4px;
+}
+#web-fract-3d #control-panel .panel-body .col-sm-9 input[type="number"].triple {
+  width: 30%;
 }
 #web-fract-3d canvas {
   background: black;

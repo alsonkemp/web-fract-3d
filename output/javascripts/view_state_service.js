@@ -3,21 +3,22 @@
   WebFract3D.factory("ViewStateService", function($rootScope) {
     var fresh_state,
       _this = this;
+    this.state = {};
     fresh_state = {
       position: {
         x: 0,
-        y: -100,
-        z: 800
+        y: 40,
+        z: 700
       },
       rotation: {
-        x: -40,
+        x: -30,
         y: 0,
         z: 0
       },
-      size: 800
+      size: 400
     };
     this.reset = function() {
-      return _this.state = _.extend({}, fresh_state);
+      return _.extend(_this.state, fresh_state);
     };
     $rootScope.ViewStateService = this;
     this.reset();

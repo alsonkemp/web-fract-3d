@@ -1,3 +1,5 @@
+# Storing commonly used functions on the base object...
+# Should probably create seperate base classes...
 class WebFract3D.Fractals.Base
   constructor: (view_state_service, fractal_state_service) ->
     @points = []
@@ -47,3 +49,53 @@ class WebFract3D.Fractals.Base
       r1*r2 - i1*i2,
       r1*i2 + r2*i1
     ]
+
+  makePoles: (num) ->
+    poles = []
+    for n in [0...num]
+      rot = 2 * Math.PI * n / num
+      poles.push [Math.cos(rot), Math.sin(rot)]
+    poles
+
+  depthFunction: (iter) ->
+    @view_state.size \
+    * (0.5 - Math.log(iter  + 1 - @min_iterations) \
+    / Math.log(@max_iterations - @min_iterations))
+
+  mandelColorFunction: (iter) ->
+    if iter == @fractal_state.max_iterations
+      [0,0,0]
+    else if (iter % 120 < 20)
+      [0.2+(iter % 120)/25.0, 0, 0]
+    else if ( ((iter % 120) >= 20) && ((iter % 120) <40) )
+      [1, 0.2+(iter % 120)/25, 0, 0]
+    else if ( ((iter % 120) >= 40) && ((iter % 120) <60) )
+      [1.0-((iter%120)-40)/20, 1, 0]
+    else if ( ((iter % 120) >= 60) && ((iter % 120) <80) )
+      [0, 1, 0.2+((iter%120)-60)/25]
+    else if ( ((iter % 120) >= 80) && ((iter % 120) <100) )
+      [0, 1-((iter%120)-80)/20, 1]
+    else
+      [0, 0, 1-((iter%120)-100)/20]
+
+  newtonColors: [
+      [0.0,0.0,0.0],
+      [1.0,0.0,0.0],
+      [0.0,1.0,0.0],
+      [0.0,0.0,1.0],
+      [1.0,1.0,0.0],
+      [0.0,1.0,1.0],
+      [1.0,0.0,1.0],
+      [1.0,1.0,0.5],
+      [0.5,1.0,1.0],
+      [1.0,0.5,1.0]
+      [0.7,0.7,1.0]
+    ]
+  newtonCloseDistance: 0.01
+  newtonColorFunction: (iter, zr, zi) ->
+      for p, idx in @poles
+        r = p[0] - zr
+        i = p[1] - zi
+        if Math.sqrt(r*r + i*i) < @newtonCloseDistance
+          return @newtonColors[idx+1]
+      return @newtonColors[0]

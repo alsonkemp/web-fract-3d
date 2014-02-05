@@ -20,12 +20,6 @@ WebFract3D.controller 'ControlPanelCtrl', ($scope, $location, $window,
           fs.divisions /= 2
           fs.divisions = 8 if fs.divisions < 8
         when ']' then fs.divisions *= 2
-        when '1' then changeFractal('Mandelbrot')
-        when '2' then changeFractal('Mandelbrot3')
-        when '3' then changeFractal('Newton2')
-        when '4' then changeFractal('Newton3')
-        when '5' then changeFractal('Newton4')
-        when '6' then changeFractal('Newton6')
 
       # Special keys
       switch evt.keyCode
@@ -50,12 +44,10 @@ WebFract3D.controller 'ControlPanelCtrl', ($scope, $location, $window,
       # by Angular
       $rootScope.$digest()
 
-  changeFractal = (newFractal) ->
+  $rootScope.$watch 'FractalStateService.state.fractal', () =>
     # Set initial state
     ViewStateService.reset()
     FractalStateService.reset()
-
-    FractalStateService.fractal = newFractal
 
   # Special keys need keydown?
   $window.onkeydown = $scope.handleKeyPress
@@ -67,3 +59,6 @@ WebFract3D.controller 'ControlPanelCtrl', ($scope, $location, $window,
       FractalStateService.state[k] = Number(v)
     else 
       FractalStateService.state[k] = v
+
+  window._fss = FractalStateService
+  window._rs  = $rootScope

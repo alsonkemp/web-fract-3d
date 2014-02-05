@@ -12,6 +12,8 @@
       return _ref;
     }
 
+    Newton2.prototype.colorFunction = WebFract3D.Fractals.Base.prototype.newtonColorFunction;
+
     Newton2.prototype.poles = [[1, 0], [-1, 0]];
 
     Newton2.prototype.calculate = function(r, i) {

@@ -20,17 +20,23 @@
           <div class="form-group">
             <label class="col-sm-3 control-label">View Position</label>
             <div class="col-sm-9">
-              <input type="number" ng-model="view_state.position.x" class="form-control">
-              <input type="number" ng-model="view_state.position.y" class="form-control">
-              <input type="number" ng-model="view_state.position.z" class="form-control">
+              <input type="number" ng-model="view_state.position.x" class="triple form-control">
+              <input type="number" ng-model="view_state.position.y" class="triple form-control">
+              <input type="number" ng-model="view_state.position.z" class="triple form-control">
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-3 control-label">View Rotation</label>
             <div class="col-sm-9">
-              <input type="number" min="-180" max="180" ng-model="view_state.rotation.x" class="form-control">
-              <input type="number" min="-180" max="180" ng-model="view_state.rotation.y" class="form-control">
-              <input type="number" min="-180" max="180" ng-model="view_state.rotation.z" class="form-control">
+              <input type="number" min="-180" max="180" ng-model="view_state.rotation.x" class="triple form-control">
+              <input type="number" min="-180" max="180" ng-model="view_state.rotation.y" class="triple form-control">
+              <input type="number" min="-180" max="180" ng-model="view_state.rotation.z" class="triple form-control">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Fractal</label>
+            <div class="col-sm-9">
+              <select ng-model="fractal_state.fractal" ng-options="f for f in fractal_state.fractals" class="form-control"></select>
             </div>
           </div>
           <div class="form-group">
@@ -38,13 +44,6 @@
             <div class="col-sm-9">
               <input type="number" min="-4" max="4" ng-model="fractal_state.r" class="form-control">
               <input type="number" min="-4" max="4" ng-model="fractal_state.i" class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Julia Position</label>
-            <div class="col-sm-9">
-              <input type="number" min="-4" max="4" ng-model="fractal_state.jr" class="form-control">
-              <input type="number" min="-4" max="4" ng-model="fractal_state.ji" class="form-control">
             </div>
           </div>
           <div class="form-group">
@@ -105,17 +104,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r61/three.min.js"></script>
     <script src="./javascripts/base.js"></script>
     <script src="./javascripts/control_panel_controller.js"></script>
-    <script src="./javascripts/color_functions.js"></script>
-    <script src="./javascripts/depth_functions.js"></script>
     <script src="./javascripts/view_state_service.js"></script>
     <script src="./javascripts/fractal_state_service.js"></script>
     <script src="./javascripts/renderer.js"></script>
     <script src="./javascripts/fractals/base.js"></script>
     <script src="./javascripts/fractals/mandelbrot.js"></script>
+    <script src="./javascripts/fractals/inverted_mandelbrot.js"></script>
+    <script src="./javascripts/fractals/half_mandelbrot.js"></script>
+    <script src="./javascripts/fractals/mandelbrot_plus.js"></script>
     <script src="./javascripts/fractals/mandelbrot3.js"></script>
+    <script src="./javascripts/fractals/mandelbrot4.js"></script>
+    <script src="./javascripts/fractals/mandelbrot5.js"></script>
     <script src="./javascripts/fractals/newton2.js"></script>
     <script src="./javascripts/fractals/newton3.js"></script>
     <script src="./javascripts/fractals/newton4.js"></script>
     <script src="./javascripts/fractals/newton6.js"></script>
+    <script src="./javascripts/fractals/newton10.js"></script>
   </body>
 </html>

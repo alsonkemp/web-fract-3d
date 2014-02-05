@@ -7,6 +7,8 @@ WebFract3D.factory "RendererService", ($rootScope, $location,
     @webgl_renderer.setSize window.innerWidth, window.innerHeight
 
   @recalc = () =>
+    if not FractalStateService.state.fractal
+      return
     @fractal = new WebFract3D.Fractals[FractalStateService.state.fractal](
                      ViewStateService, FractalStateService)
     @scene.remove @mesh
@@ -28,24 +30,25 @@ WebFract3D.factory "RendererService", ($rootScope, $location,
     vss = ViewStateService.state
 
     geometry = new THREE.Geometry()
-    color_f = WebFract3D.ColorFunctions[fss.fractal] @fractal
-    depth_f = WebFract3D.DepthFunctions[fss.fractal] @fractal, ViewStateService
 
-    min = vss.size / -2
-    inc = vss.size / fss.divisions
-    y = min
+    aspect_ratio = (window.innerWidth-300) / window.innerHeight
+    ymin = vss.size / -2
+    yinc = vss.size / fss.divisions
+    xmin = ymin * aspect_ratio
+    xinc = yinc * aspect_ratio
+    y = ymin
     v = 0
     # shorthand
     points = @fractal.points
     for _y in [1..fss.divisions]
-      x = min
+      x = xmin
       for _x in [1..fss.divisions]
         buildVertex = (dx,dy) =>
           [i, zr, zi] = points[_y + dy][_x + dx]
-          d = depth_f i
-          geometry.vertices.push(new THREE.Vector3(x + dx*inc, y + dy*inc, d))
+          d = @fractal.depthFunction i
+          geometry.vertices.push(new THREE.Vector3(x + dx*xinc, y + dy*yinc, d))
           c = new THREE.Color('0xffffff')
-          c.setRGB.apply c, color_f(i, zr, zi)
+          c.setRGB.apply c, @fractal.colorFunction(i, zr, zi)
           f.vertexColors.push c
 
         # First triangle
@@ -62,8 +65,8 @@ WebFract3D.factory "RendererService", ($rootScope, $location,
         buildVertex  0, -1
         geometry.faces.push f
 
-        x += inc
-      y += inc
+        x += xinc
+      y += yinc
     new THREE.Mesh(
           geometry,
           new THREE.MeshBasicMaterial( { side: THREE.DoubleSide, vertexColors: THREE.VertexColors } ))
