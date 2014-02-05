@@ -3,7 +3,7 @@ WebFract3D.factory "ViewStateService", ($rootScope) ->
   fresh_state =
     position: x: 0, y: 40, z: 700
     rotation: x: -30, y: 0, z: 0
-    size: 400
+    size: 600
 
   @reset = () =>
     _.extend @state, fresh_state

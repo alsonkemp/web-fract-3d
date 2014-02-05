@@ -15,7 +15,7 @@
         y: 0,
         z: 0
       },
-      size: 400
+      size: 600
     };
     this.reset = function() {
       return _.extend(_this.state, fresh_state);
