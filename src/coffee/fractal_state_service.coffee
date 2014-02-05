@@ -26,7 +26,7 @@ WebFract3D.factory "FractalStateService", ($rootScope) ->
     # Don't reset the fractal, though
     f = @state.fractal
     _.extend @state, fresh_state
-    @state.fractal = f
+    @state.fractal = f or 'Mandelbrot'
 
   # Make this watchable and set the initial state
   $rootScope.FractalStateService = this

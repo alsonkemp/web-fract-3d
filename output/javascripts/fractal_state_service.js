@@ -17,7 +17,7 @@
       var f;
       f = _this.state.fractal;
       _.extend(_this.state, fresh_state);
-      return _this.state.fractal = f;
+      return _this.state.fractal = f || 'Mandelbrot';
     };
     $rootScope.FractalStateService = this;
     this.reset();
