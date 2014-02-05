@@ -57,6 +57,7 @@ class WebFract3D.Fractals.Base
       poles.push [Math.cos(rot), Math.sin(rot)]
     poles
 
+  # These should not be here.  TODO: Factor them out.
   depthFunction: (iter) ->
     @view_state.size \
     * (0.5 - Math.log(iter  + 1 - @min_iterations) \
