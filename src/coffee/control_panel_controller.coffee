@@ -55,9 +55,12 @@ WebFract3D.controller 'ControlPanelCtrl', ($scope, $location, $window,
       FractalStateService.state[k] = Number(v)
     else 
       FractalStateService.state[k] = v
+    # We've gotten fractal state from the search bar, so don't reset
+    FractalStateService.skip_initial_reset = true
 
   $rootScope.$watch 'FractalStateService.state.fractal', () =>
     # Set initial state
     ViewStateService.reset()
-    if not FractalStateService.state.fractal
+    if not FractalStateService.skip_initial_reset
       FractalStateService.reset()
+    FractalStateService.skip_initial_reset = false

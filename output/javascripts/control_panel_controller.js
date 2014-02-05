@@ -88,12 +88,14 @@
       } else {
         FractalStateService.state[k] = v;
       }
+      FractalStateService.skip_initial_reset = true;
     }
     return $rootScope.$watch('FractalStateService.state.fractal', function() {
       ViewStateService.reset();
-      if (!FractalStateService.state.fractal) {
-        return FractalStateService.reset();
+      if (!FractalStateService.skip_initial_reset) {
+        FractalStateService.reset();
       }
+      return FractalStateService.skip_initial_reset = false;
     });
   });
 
