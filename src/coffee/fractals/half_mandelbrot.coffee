@@ -1,4 +1,4 @@
-class WebFract3D.Fractals.MandelbrotPlus extends WebFract3D.Fractals.Mandelbrot
+class WebFract3D.Fractals.HalfMandelbrot extends WebFract3D.Fractals.Mandelbrot
   calculate: (r,i) ->
     zr = 0
     zi = 0
