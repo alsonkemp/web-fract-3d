@@ -7,7 +7,7 @@
     fresh_state = {
       position: {
         x: 0,
-        y: 40,
+        y: -40,
         z: 700
       },
       rotation: {
