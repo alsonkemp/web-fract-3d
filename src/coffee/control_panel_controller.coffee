@@ -44,10 +44,6 @@ WebFract3D.controller 'ControlPanelCtrl', ($scope, $location, $window,
       # by Angular
       $rootScope.$digest()
 
-  $rootScope.$watch 'FractalStateService.state.fractal', () =>
-    # Set initial state
-    ViewStateService.reset()
-    FractalStateService.reset()
 
   # Special keys need keydown?
   $window.onkeydown = $scope.handleKeyPress
@@ -60,5 +56,8 @@ WebFract3D.controller 'ControlPanelCtrl', ($scope, $location, $window,
     else 
       FractalStateService.state[k] = v
 
-  window._fss = FractalStateService
-  window._rs  = $rootScope
+  $rootScope.$watch 'FractalStateService.state.fractal', () =>
+    # Set initial state
+    ViewStateService.reset()
+    if not FractalStateService.state.fractal
+      FractalStateService.reset()

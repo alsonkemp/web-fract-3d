@@ -16,7 +16,11 @@ WebFract3D.factory "RendererService", ($rootScope, $location,
     @mesh = @getNewMesh()
     @scene.add @mesh
     @redraw()
-    $location.search(FractalStateService.state)
+
+    # Set the URL to reflect the state (minus the fractals list)
+    _search = _.extend {}, FractalStateService.state
+    delete _search['fractals']
+    $location.search(_search)
 
   @redraw = () =>
     vss = ViewStateService.state

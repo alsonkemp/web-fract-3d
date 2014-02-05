@@ -5,7 +5,6 @@
       _this = this;
     this.state = {};
     fresh_state = {
-      fractal: 'Mandelbrot',
       fractals: ['Mandelbrot', 'MandelbrotPlus', 'HalfMandelbrot', 'InvertedMandelbrot', 'Mandelbrot3', 'Mandelbrot4', 'Mandelbrot5', 'Newton2', 'Newton3', 'Newton4', 'Newton6', 'Newton10'],
       r: 0,
       i: 0,

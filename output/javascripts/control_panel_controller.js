@@ -78,10 +78,6 @@
         return $rootScope.$digest();
       }
     });
-    $rootScope.$watch('FractalStateService.state.fractal', function() {
-      ViewStateService.reset();
-      return FractalStateService.reset();
-    });
     $window.onkeydown = $scope.handleKeyPress;
     $window.onkeypress = $scope.handleKeyPress;
     _ref = $location.search();
@@ -93,8 +89,12 @@
         FractalStateService.state[k] = v;
       }
     }
-    window._fss = FractalStateService;
-    return window._rs = $rootScope;
+    return $rootScope.$watch('FractalStateService.state.fractal', function() {
+      ViewStateService.reset();
+      if (!FractalStateService.state.fractal) {
+        return FractalStateService.reset();
+      }
+    });
   });
 
 }).call(this);

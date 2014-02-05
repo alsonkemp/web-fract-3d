@@ -9,6 +9,7 @@
       return _this.webgl_renderer.setSize(window.innerWidth, window.innerHeight);
     };
     this.recalc = function() {
+      var _search;
       if (!FractalStateService.state.fractal) {
         return;
       }
@@ -17,7 +18,9 @@
       _this.mesh = _this.getNewMesh();
       _this.scene.add(_this.mesh);
       _this.redraw();
-      return $location.search(FractalStateService.state);
+      _search = _.extend({}, FractalStateService.state);
+      delete _search['fractals'];
+      return $location.search(_search);
     };
     this.redraw = function() {
       var v, vss, _i, _len, _ref;

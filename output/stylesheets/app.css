@@ -13,6 +13,13 @@
   top: 5px;
   right: 5px;
 }
+#web-fract-3d #control-panel .panel-body .form-group {
+  margin-bottom: 5px;
+}
+#web-fract-3d #control-panel .panel-body .control-label {
+  padding-top: 0;
+  line-height: 1em;
+}
 #web-fract-3d #control-panel .panel-body .col-sm-9 input[type="number"] {
   display: inline-block;
   width: 48%;

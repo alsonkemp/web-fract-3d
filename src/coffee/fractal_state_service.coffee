@@ -1,7 +1,6 @@
 WebFract3D.factory "FractalStateService", ($rootScope) ->
   @state = {}
   fresh_state =
-      fractal: 'Mandelbrot'
       fractals: [
         'Mandelbrot',
         'MandelbrotPlus',
